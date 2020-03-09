@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "fe": "npm run start --prefix front",
+    "server": "nodemon index.js",
+    "dev": "concurrently \"npm run server\" \"npm run fe\"",
+    "heroku-postbuild": "npm install --prefix fe && npm run build --prefix fe"
   },
   "author": "",
   "license": "ISC",
