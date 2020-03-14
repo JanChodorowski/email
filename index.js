@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const EmailValidator = require('email-deep-validator');
+const validate = require('deep-email-validator').validate;
 
 const remote =
   process.env.NODE_ENV === 'production' ||
@@ -17,6 +18,11 @@ app.get('/api/:email', async (req, res) => {
   console.log(req.params.email);
 
   res.send({ wellFormed, validDomain, validMailbox });
+});
+
+app.get('/api/test/:email', async (req, res) => {
+  let result = await validate(req.params.email);
+  res.send(result);
 });
 
 if (remote) {
